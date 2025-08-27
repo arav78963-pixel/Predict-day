@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔮 Predict Your Next Day</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #0d1117;
+        color: #fff;
+        text-align: center;
+        padding: 40px;
+    }
+    h1 {
+        margin-bottom: 20px;
+    }
+    h2 {
+        margin-bottom: 30px;
+        color: #00ff88;
+    }
+    select, button {
+        padding: 10px 15px;
+        font-size: 16px;
+        margin: 10px;
+        border-radius: 8px;
+        border: none;
+    }
+    button {
+        background-color: #0078ff;
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    button:hover {
+        background-color: #005fcc;
+    }
+    .loading-box {
+        margin-top: 30px;
+        font-size: 18px;
+        line-height: 1.8;
+    }
+    .hidden {
+        display: none;
+    }
+    .result {
+        font-size: 22px;
+        margin-top: 30px;
+        font-weight: bold;
+        color: #00ff88;
+    }
+    footer {
+        margin-top: 50px;
+        font-size: 14px;
+        color: #bbb;
+    }
+</style>
+</head>
+<body>
+<h1>🔮 Predict Your Next Day</h1>
+<h2>Choose Your Day & See the Magic ✨</h2>
+<select id="daySelect">
+    <option value="Monday">Monday</option>
+    <option value="Tuesday">Tuesday</option>
+    <option value="Wednesday">Wednesday</option>
+    <option value="Thursday">Thursday</option>
+    <option value="Friday">Friday</option>
+    <option value="Saturday">Saturday</option>
+    <option value="Sunday">Sunday</option>
+</select>
+<button onclick="startPrediction()">🔍 Predict</button>
+
+<div id="loadingBox" class="loading-box hidden"></div>
+<div id="result" class="result hidden"></div>
+<footer>Website developed by Aarav Yadav</footer>
+<script>
+    const messages = [
+        "👽 1 missed call received from alien...",
+        "🔐 2 going physical with secret codes...",
+        "🌀 3 encrypted portals opening soon...",
+        "📡 4 unknown signals detected nearby..."
+    ];
+
+    function startPrediction() {
+        const day = document.getElementById('daySelect').value;
+        const loadingBox = document.getElementById('loadingBox');
+        const resultBox = document.getElementById('result');
+
+        // Reset displays
+        loadingBox.innerHTML = "";
+        loadingBox.classList.remove("hidden");
+        resultBox.classList.add("hidden");
+
+        let i = 0;
+        const interval = setInterval(() => {
+            if (i < messages.length) {
+                loadingBox.innerHTML += messages[i] + "<br>";
+                i++;
+            } else {
+                clearInterval(interval);
+                setTimeout(() => {
+                    loadingBox.classList.add("hidden");
+                    resultBox.textContent = "✨ Your day is: " + day + " ✨";
+                    resultBox.classList.remove("hidden");
+                }, 1000);
+            }
+        }, 1200); // 1.2 sec gap between messages
+    }
+</script>
+</body>
+</html>
